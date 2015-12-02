@@ -182,8 +182,10 @@ void draw(){
       for(int i=0; i<numFire; i++){
     shootX[i]-=speed;
     image(shoot,shootX[i],shootY[i]);
+    
     enemyID=closestEnemy(i,i);
-    if(shootX[i]>enemyChange){
+    if(enemyChange+400>0){
+    if(shootX[i]>enemyChange && enemyID!=-1){
     if(shootY[i]<enemyY[enemyID]){
     shootY[i]+=2;
     }
@@ -191,12 +193,12 @@ void draw(){
     shootY[i]-=2;
     }
     }
-    
     }
+    }
+      
 
     if(shootX[0]+31<0.0){
     shootCount--;
-    
     }
     }
     if(shootCount<=-1){
@@ -267,15 +269,15 @@ void addEnemy(int type)
   switch (type) {
     case 0:
       addStraightEnemy();
-      enemyChange=enemyX[0]-400;
+      enemyChange=enemyX[0]-320;
       break;
     case 1:
       addSlopeEnemy();
-      enemyChange=enemyX[0]-400;
+      enemyChange=enemyX[0]-320;
       break;
     case 2:
       addDiamondEnemy();
-      enemyChange=enemyX[0]-400;
+      enemyChange=enemyX[0]-320;
       break;
   }
   
@@ -402,6 +404,7 @@ score+=value;
 int closestEnemy(int x, int y){
 float min=dist(enemyX[0]+30.5,enemyY[0]+30.5,shootX[x]+15.5,shootY[y]+13.5);
 for(int i=0; i<enemyCount; i++){
+
 if(enemyX[i]!=-1&&enemyY[i]!=-1){
 if(dist(enemyX[i],enemyY[i],x,y)<=min){
 min=dist(enemyX[i],enemyY[i],x,y);
@@ -411,4 +414,3 @@ k=i;
 }
 return k;
 }
-
